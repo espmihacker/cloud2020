@@ -1,0 +1,11 @@
+server:
+  port: 80
+
+spring:
+  application:
+    # 服务别名---注册zookeeper到注册中心的名称
+    name: cloud-consumer-order
+  cloud:
+    zookeeper:
+      # 默认localhost:2181
+      connect-string: 192.168.0.112:2181

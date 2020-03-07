@@ -32,19 +32,19 @@ public class OrderController {
     private DiscoveryClient discoveryClient;
 
     @RequestMapping(value = "/consumer/payment/create", method = RequestMethod.POST)
-    public CommonResult<Payment> create(Payment payment) {
+    public CommonResult create(Payment payment) {
 
         return restTemplate.postForObject(PAYMENT_URL + "/payment/create", payment, CommonResult.class);
     }
 
     @RequestMapping(value = "/consumer/payment/get/{id}", method = RequestMethod.GET)
-    public CommonResult getPaymenyById(@PathVariable("id")Long id) {
+    public CommonResult getPaymentById(@PathVariable("id")Long id) {
 
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
     }
 
     @RequestMapping(value = "/consumer/payment/getForEntity/{id}", method = RequestMethod.GET)
-    public CommonResult<Payment> getPaymenyById2(@PathVariable("id")Long id) {
+    public CommonResult getPaymenyById2(@PathVariable("id")Long id) {
 
         ResponseEntity<CommonResult> entity = restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
 
@@ -55,6 +55,10 @@ public class OrderController {
         }
     }
 
+    /**
+     * 自我实现负载均衡轮询算法 仿ribbon
+     * @return
+     */
     @RequestMapping(value = "/consumer/payment/lb", method = RequestMethod.GET)
     public String getPaymentLb() {
         List<ServiceInstance> services = discoveryClient.getInstances("CLOUD-PAYMENT-SERVICE");
@@ -65,6 +69,12 @@ public class OrderController {
         ServiceInstance instance = loadBalanced.instance(services);
         URI uri = instance.getUri();
         return restTemplate.getForObject(uri + "/payment/lb", String.class);
+    }
+
+    //==========================>zipkin
+    @RequestMapping(value = "/consumer/payment/zipkin", method = RequestMethod.GET)
+    public String paymentZipkin() {
+        return restTemplate.getForObject(PAYMENT_URL + "/payment/zipkin", String.class);
     }
 
 }

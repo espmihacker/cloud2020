@@ -82,4 +82,9 @@ public class PaymentController {
         }
         return serverPort;
     }
+
+    @RequestMapping(value = "/payment/zipkin", method = RequestMethod.GET)
+    public String paymentZipkin() {
+        return "Zipkin~~~~ O(∩_∩)O哈哈~";
+    }
 }

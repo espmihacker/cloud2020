@@ -26,7 +26,6 @@ eureka:
       defaultZone: http://eureka7001.com:7001/eureka
 
 # 暴露bus刷新配置的端点
-
 management:
   endpoints:
     web:

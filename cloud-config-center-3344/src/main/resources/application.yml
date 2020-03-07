@@ -9,7 +9,7 @@ spring:
     config:
       server:
         git:
-          uri: git@github.com:espmihacker/springcloud-config.git
+          uri: https://github.com/espmihacker/springcloud-config
           search-paths:
             - springcloud-config
       label: master

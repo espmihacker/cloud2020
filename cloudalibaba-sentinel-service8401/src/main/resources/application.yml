@@ -1,0 +1,21 @@
+server:
+  port: 8401
+
+spring:
+  application:
+    name: cloudalibaba-sentinel-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.0.112:8848
+    sentinel:
+      transport:
+        dashboard: 192.168.0.112:8718
+        # 默认为8719，如果被占用会自动+1，直到找到为止
+        port: 8719
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

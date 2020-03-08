@@ -1,0 +1,6 @@
+# nacos注册配置
+spring:
+  profiles:
+    active: dev # 开发环境
+    # active: test # 测试环境
+    # active: pro # 正式环境

@@ -13,6 +13,15 @@ spring:
         dashboard: 192.168.0.112:8718
         # 默认为8719，如果被占用会自动+1，直到找到为止
         port: 8719
+      # 流控规则持久化到nacos
+      datasource:
+        dsl:
+          nacos:
+            server-addr: 192.168.0.112:8848
+            data-id: ${spring.application.name}
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
 
 management:
   endpoints:
